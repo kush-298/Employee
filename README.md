@@ -22,7 +22,29 @@ There are three modules in this application
 - Please have Maven version `3.3.3` & Java 8 on your system.
 - Use command `mvn clean install` to build the project.
 - Use command `mvn spring-boot:run` from `employeeservImplementation` folder to run the project.
-- Use postman or curl to access `http://localhost:8080/v1/bfs/employee/1` GET endpoint. It will return an Employee resource.
+- Use postman or curl to access the above mentioned API's.
+- Sample Json for creating the Employee is mentioned below. The json can take multiple address like permanent, temporary etc.
+
+{
+    "firstName": "Rohit",
+    "lastName": "Sharma",
+    "addresses": [
+        {
+            "line1": "112, Block K, south city 1",
+            "city": "gurugram",
+            "country": "india",
+            "state" : "haryana",
+            "zipCode": "122001"
+        },
+        {
+            "line1": "55/2, Block N,sector 45",
+            "city": "Mumbai",
+            "country": "india",
+            "state" : "maharashtra",
+            "zipCode": "400036"
+        }
+    ]
+}
 
 ## Assignment
 We would like you to enhance the existing project and see you complete the following requirements:
