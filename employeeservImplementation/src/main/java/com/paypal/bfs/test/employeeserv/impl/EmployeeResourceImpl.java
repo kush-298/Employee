@@ -7,6 +7,8 @@ import com.paypal.bfs.test.employeeserv.dao.EmployeeRepository;
 import com.paypal.bfs.test.employeeserv.exception.ActionNotAllowedException;
 import com.paypal.bfs.test.employeeserv.exception.EntityNotFoundException;
 import com.paypal.bfs.test.employeeserv.exception.InternalServerException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +27,14 @@ import javax.transaction.Transactional;
 @Transactional
 public class EmployeeResourceImpl implements EmployeeResource {
 
+    private static final Logger logger = LogManager.getLogger(EmployeeResourceImpl.class);
+
     @Autowired
     private EmployeeRepository employeeRepository;
 
     @Override
     public ResponseEntity<Employee> employeeGetById(Integer id) throws Exception {
+        logger.debug("Fetching employee details for emp id {}", id);
         Employee employee;
         try {
             employee = employeeRepository.findEmployeeById(id);
@@ -46,6 +51,7 @@ public class EmployeeResourceImpl implements EmployeeResource {
 
     @Override
     public ResponseEntity createEmployee(Employee employee) throws Exception {
+        logger.debug("Inserting employee details");
         try {
             this.validateEmployeeDetails(employee);
             employeeRepository.save(employee);
@@ -59,6 +65,7 @@ public class EmployeeResourceImpl implements EmployeeResource {
 
     @Override
     public ResponseEntity updateEmployee(Integer id, Employee employee) throws Exception {
+        logger.debug("Updating employee details for emp id {}", id);
         Employee persistedEmployee = employeeRepository.findEmployeeById(id);
         if (persistedEmployee == null) {
             throw new EntityNotFoundException(String.format("Employee details not found for employee id %s", id));
@@ -77,6 +84,7 @@ public class EmployeeResourceImpl implements EmployeeResource {
 
     @Override
     public ResponseEntity deleteEmployee(Integer id) throws Exception {
+        logger.debug("Deleting employee details for emp id {}", id);
         Employee persistedEmployee = employeeRepository.findEmployeeById(id);
         if (persistedEmployee == null) {
             throw new EntityNotFoundException(String.format("Employee details not found for employee id %s", id));
@@ -93,6 +101,7 @@ public class EmployeeResourceImpl implements EmployeeResource {
 
     @Override
     public ResponseEntity fetchAllEmployees() throws Exception {
+        logger.debug("Fetching list of employee details");
         Map<String, Object> response = new HashMap<>();
         List<Employee> employees;
         try {
