@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+
+    <entity class="com.paypal.bfs.test.employeeserv.api.model.Employee" access="FIELD">
+        <table name="employee"/>
+        <sequence-generator name="employee_id" sequence-name="employee_id_sequence"></sequence-generator>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" generator="employee_id"/>
+            </id>
+            <basic name="firstName">
+                <column name="first_name" />
+            </basic>
+            <basic name="firstName">
+                <column name="first_name" />
+            </basic>
+            <basic name="lastName">
+                <column name="last_name" />
+            </basic>
+            <basic name="dateOfBirth">
+                <column name="date_of_birth" />
+            </basic>
+            <one-to-many name="addresses" fetch="EAGER">
+                <join-column name="address_id" referenced-column-name="id"/>
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+    <entity class="com.paypal.bfs.test.employeeserv.api.model.Address" access="FIELD">
+        <table name="address"/>
+        <sequence-generator name="address_id" sequence-name="address_id_sequence"></sequence-generator>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" generator="address_id"/>
+            </id>
+            <basic name="line1">
+                <column name="line_1" length="1024"/>
+            </basic>
+            <basic name="line2">
+                <column name="line_2" length="1024"/>
+            </basic>
+            <basic name="city">
+                <column name="city" />
+            </basic>
+            <basic name="state">
+                <column name="state" />
+            </basic>
+            <basic name="country">
+                <column name="country" />
+            </basic>
+            <basic name="zipCode">
+                <column name="zip_code" />
+            </basic>
+        </attributes>
+    </entity>
+
+</entity-mappings>

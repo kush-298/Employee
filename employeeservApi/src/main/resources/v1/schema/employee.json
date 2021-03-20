@@ -1,0 +1,91 @@
+{
+  "title": "Employee resource",
+  "description": "Employee resource object",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "employee id",
+      "type": "integer"
+    },
+    "firstName": {
+      "description": "first name",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "lastName": {
+      "description": "last name",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "dateOfBirth": {
+      "description": "date of birth",
+      "type": "string",
+      "format": "date-time"
+    },
+    "addresses": {
+      "type": "array",
+      "description": "list of employee addresses",
+      "items": {
+        "description": "Address",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "address id",
+            "type": "integer"
+          },
+          "line1": {
+            "description": "line 1",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "line2": {
+            "description": "line 2",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "city": {
+            "description": "city",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "state": {
+            "description": "state",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "country": {
+            "description": "country",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "zipCode": {
+            "description": "zip code",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "line1",
+          "city",
+          "state",
+          "country",
+          "zipCode"
+        ]
+      }
+    }
+  },
+  "required": [
+    "firstName",
+    "lastName"
+  ]
+}
