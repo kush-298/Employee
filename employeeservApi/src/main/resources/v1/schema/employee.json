@@ -41,13 +41,13 @@
             "description": "line 1",
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 1024
           },
           "line2": {
             "description": "line 2",
             "type": "string",
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 1024
           },
           "city": {
             "description": "city",
