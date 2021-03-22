@@ -52,15 +52,18 @@ public class EmployeeResourceImpl implements EmployeeResource {
     @Override
     public ResponseEntity createEmployee(Employee employee) throws Exception {
         logger.debug("Inserting employee details");
+        Map<String, Object> response = new HashMap<>();
         try {
             this.validateEmployeeDetails(employee);
             employeeRepository.save(employee);
+            response.put("message", "Created Successfully");
+            response.put("Employee Id", employee.getId());
         } catch (ActionNotAllowedException ex1) {
             throw ex1;
         } catch (Exception ex) {
             throw new InternalServerException("Something went wrong while saving employee details", ex);
         }
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
@@ -70,16 +73,19 @@ public class EmployeeResourceImpl implements EmployeeResource {
         if (persistedEmployee == null) {
             throw new EntityNotFoundException(String.format("Employee details not found for employee id %s", id));
         }
+        Map<String, Object> response = new HashMap<>();
         try {
             employee.setId(persistedEmployee.getId());
             this.validateEmployeeDetails(employee);
             employeeRepository.save(employee);
+            response.put("message", "Updated Successfully");
+            response.put("Employee Id", employee.getId());
         } catch (ActionNotAllowedException ex1) {
             throw ex1;
         } catch (Exception ex) {
             throw new InternalServerException("Something went wrong while updating employee details", ex);
         }
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
